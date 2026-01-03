@@ -107,5 +107,44 @@
   </a>
   </div>
 </a>
+  <!-- Ramadan Countdown Top Banner -->
+<div id="ramadan-top">
+  🌙 Ramadan in:
+  <span id="ramadan-time">Loading...</span>
+</div>
+
+<style>
+#ramadan-top{
+  width: 100%;
+  background: linear-gradient(90deg, #1e3a8a, #2563eb);
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+}
+</style>
+
+<script>
+const ramadanDate = new Date("March 1, 2026 00:00:00").getTime();
+
+setInterval(() => {
+  const now = new Date().getTime();
+  const diff = ramadanDate - now;
+
+  if (diff <= 0) {
+    document.getElementById("ramadan-time").innerHTML = "Ramadan Mubarak 🌙";
+    return;
+  }
+
+  const months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30));
+  const days = Math.floor((diff % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+  document.getElementById("ramadan-time").innerHTML =
+    months + "m " + days + "d " + hours + "h";
+}, 1000);
+</script>l
 </body>
 </html>
