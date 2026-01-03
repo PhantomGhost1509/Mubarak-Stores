@@ -104,47 +104,22 @@
 <footer>
   <p>📍 Thank you for visiting Mubarak Stores! 🌸</p>
 </footer>
-<!-- Feedback Section with Centered Banner -->
-<section style="background: #e8f5e9; padding: 30px; border-radius: 15px; margin: 20px; text-align: center; position: relative;">
-  
-  <!-- Banner / Note -->
-  <div style="display: inline-block; background:#ffeb3b; padding:10px 20px; border-radius:12px; font-weight:bold; font-size:18px; box-shadow: 0px 2px 5px rgba(0,0,0,0.3); margin-bottom:20px;">
-    📋 Give Feedback Here! 📨
-  </div>
-
-  <!-- Form Header -->
-  <h2 style="color: #388e3c; margin-bottom:10px;">Feedback & Membership</h2>
-  <p style="margin-bottom:20px;">We’d love to hear from you! Fill this form and send 🌟</p>
-
-  <!-- Form -->
-  <form action="https://formsubmit.co/RehanShamnad08@gmail.com" method="POST" style="max-width: 500px; margin: auto; text-align:left;">
-    
-    <label style="font-weight: bold;">Your Name</label><br>
-    <input type="text" name="name" required style="width:100%; padding:10px; margin:6px 0; border-radius:5px; border:1px solid #ccc;"><br>
-    
-    <label style="font-weight: bold;">How did you like the shop today?</label><br>
-    <select name="experience" required style="width:100%; padding:10px; margin:6px 0; border-radius:5px; border:1px solid #ccc;">
-      <option value="" disabled selected>Select</option>
-      <option>😊 Excellent</option>
-      <option>🙂 Good</option>
-      <option>😐 Okay</option>
-      <option>😕 Could Improve</option>
-    </select><br>
-
-    <label style="font-weight: bold;">Which products did you buy?</label><br>
-    <input type="text" name="products" placeholder="E.g. Chocolates, Water..." style="width:100%; padding:10px; margin:6px 0; border-radius:5px; border:1px solid #ccc;"><br>
-
-    <label style="font-weight: bold;">Any suggestions / membership interest?</label><br>
-    <textarea name="message" rows="4" placeholder="Your thoughts..." style="width:100%; padding:10px; margin:6px 0; border-radius:5px; border:1px solid #ccc;"></textarea><br>
-
-    <!-- Hidden inputs for FormSubmit -->
-    <input type="hidden" name="_subject" value="New Feedback from Mubarak Stores!">
-    <input type="hidden" name="_captcha" value="false">
-
-    <button type="submit" style="background:#4caf50; color:white; padding:12px 25px; border:none; border-radius:8px; cursor:pointer; font-size:16px; margin-top:10px;">
-      📨 Send Feedback
-    </button>
-  </form>
-</section>
+<!-- Floating Feedback Button -->
+<a href="feedback.html" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #ff5722;
+  color: white;
+  padding: 14px 20px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  z-index: 9999;
+">
+  📝 Feedback
+</a>
 </body>
 </html>
