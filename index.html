@@ -134,6 +134,57 @@
 #whatsapp-feedback:hover{
   background:#1ebe5d;
 }
+  <!-- Ramadan Countdown -->
+<div id="ramadan-counter">
+  🌙 Ramadan in
+  <span id="ramadan-time">Loading…</span>
+</div>
+
+<style>
+#ramadan-counter{
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  background: linear-gradient(90deg, #0f172a, #1e3a8a);
+  color: #ffffff;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+  z-index: 999;
+}
+#ramadan-time{
+  margin-left: 6px;
+  font-weight: bold;
+}
+</style>
+
+<script>
+const ramadanDate = new Date("March 1, 2026 00:00:00").getTime();
+
+function updateRamadanCountdown() {
+  const now = new Date().getTime();
+  const diff = ramadanDate - now;
+
+  if (diff <= 0) {
+    document.getElementById("ramadan-time").innerHTML = "Ramadan Mubarak 🌙";
+    return;
+  }
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+  document.getElementById("ramadan-time").innerHTML =
+    `${days}d ${hours}h ${minutes}m ${seconds}s`;
+}
+
+updateRamadanCountdown();
+setInterval(updateRamadanCountdown, 1000);
+</script>
 </style>
 </body>
 </html>
