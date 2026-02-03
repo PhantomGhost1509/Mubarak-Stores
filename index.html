@@ -1,163 +1,204 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
+<title>Brain Rot Tycoon 3D</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mubarak Stores</title>
 <style>
-  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fffde7; color: #333; }
-
-  /* Header with colorful gradient */
-  header { 
-    background: linear-gradient(90deg, #4fc3f7, #81d4fa, #b3e5fc); 
-    padding: 30px; 
-    text-align: center; 
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-  }
-  header h1 { font-size: 2.8em; color: #ffffff; margin: 0; text-shadow: 1px 1px #555; }
-  header p { font-size: 1.2em; color: #e0f7fa; margin: 5px 0; text-shadow: 1px 1px #555; }
-
-  /* Section styling with soft pastel backgrounds */
-  section { padding: 20px; margin: 10px 0; border-radius: 15px; }
-  .chocolates { background: #ffe0b2; }
-  .drawings { background: #d1c4e9; }
-  .water { background: #b3e5fc; }
-  .charging { background: #c8e6c9; }
-  .paylater { background: #ffccbc; }
-  .membership { background: #f0f4c3; }
-  .why { background: #f8bbd0; }
-
-  h2 { font-size: 1.6em; margin-bottom: 10px; }
-  ul { list-style: none; padding-left: 0; }
-  li { margin: 5px 0; font-size: 1.1em; }
-
-  footer { background: #4fc3f7; padding: 20px; text-align: center; color: #ffffff; border-top-left-radius: 15px; border-top-right-radius: 15px; text-shadow: 1px 1px #555; }
+body { margin:0; overflow:hidden; font-family:Arial; background:#000 }
+#ui {
+  position:fixed; top:10px; left:10px;
+  background:rgba(0,0,0,.6); color:#fff;
+  padding:10px; border-radius:8px;
+}
+#shop, #admin {
+  position:fixed; bottom:10px; left:10px;
+  background:#fff; padding:10px;
+  border-radius:8px; display:none;
+  max-height:60vh; overflow:auto;
+}
+button { margin:3px 0; width:100%; }
+#adminBtn { position:fixed; top:10px; right:10px; }
 </style>
 </head>
 <body>
 
-<header>
-  <h1>🌈✨ Mubarak Stores ✨🌈</h1>
-  <p>🏪 Established 2026 — Small shop, big smiles! 💖</p>
-</header>
-
-<section class="chocolates">
-  <h2>🍫🍬 Chocolates & Chewing Gums</h2>
-  <ul>
-    <li>😋 Colorful chocolates and sweets</li>
-    <li>🍭 Chewing gums for kids and adults</li>
-    <li>🎉 Perfect for quick treats and happiness!</li>
-  </ul>
-</section>
-
-<section class="drawings">
-  <h2>🎨✏️ Drawings & Simple Items</h2>
-  <ul>
-    <li>🖍️ Drawing sheets & small art items</li>
-    <li>✏️ Pens and daily-use items</li>
-    <li>🌟 Simple things that brighten your day</li>
-  </ul>
-</section>
-
-<section class="water">
-  <h2>💧🧊 Bottled Water</h2>
-  <ul>
-    <li>💙 Clean, refreshing bottled water</li>
-    <li>💧 Stay hydrated anytime</li>
-  </ul>
-</section>
-
-<section class="charging">
-  <h2>🔌📱 Mobile Charging Station</h2>
-  <ul>
-    <li>⚡ Safe and convenient charging for your devices</li>
-    <li>😅 No need to worry about low battery while shopping</li>
-  </ul>
-</section>
-
-<section class="paylater">
-  <h2>💳⏳ Pay Later Option</h2>
-  <ul>
-    <li>😊 Pay later if you’re a trusted customer</li>
-    <li>💰 Easy and convenient!</li>
-  </ul>
-</section>
-
-<section class="membership">
-  <h2>🎟️🌟 Membership Card</h2>
-  <ul>
-    <li>✨ Get your membership card after 5 purchases</li>
-    <li>🎁 Enjoy special benefits!</li>
-  </ul>
-</section>
-
-<section class="why">
-  <h2>💖🌼 Why Choose Us?</h2>
-  <ul>
-    <li>🏠 Friendly home shop vibes</li>
-    <li>💰 Honest prices</li>
-    <li>😊 Helpful service</li>
-  </ul>
-</section>
-
-<footer>
-  <p>📍 Thank you for visiting Mubarak Stores! 🌸</p>
-</footer>
-  </a>
-  </div>
-</a>;
-  <!-- Ramadan Countdown -->
-<div id="ramadan-counter">
-  🌙 Ramadan in
-  <span id="ramadan-time">Loading…</span>
+<div id="ui">
+💰 Money: <span id="money">0</span><br>
+🧠 Brain Rots: <span id="count">0</span><br>
+<button onclick="toggleShop()">🛒 Gear Shop</button>
 </div>
 
-<style>
-#ramadan-counter{
-  position: fixed;
-  top: 12px;
-  right: 12px;
-  background: linear-gradient(90deg, #0f172a, #1e3a8a);
-  color: #ffffff;
-  padding: 10px 14px;
-  border-radius: 12px;
-  font-family: Arial, sans-serif;
-  font-size: 13px;
-  font-weight: 600;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-  z-index: 999;
-}
-#ramadan-time{
-  margin-left: 6px;
-  font-weight: bold;
-}
-</style>
+<button id="adminBtn" onclick="openAdmin()">ADMIN</button>
+
+<div id="shop"></div>
+<div id="admin"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 
 <script>
-const ramadanDate = new Date("March 1, 2026 00:00:00").getTime();
+// ---------------- BASIC DATA ----------------
+let money = 0;
+let brainCount = 0;
+let speedBoost = 1;
+let isAdmin = false;
 
-function updateRamadanCountdown() {
-  const now = new Date().getTime();
-  const diff = ramadanDate - now;
+// Brain Rot list (editable, expandable)
+const brainRots = [
+ {name:"Basic Brain Rot", value:5, speed:0.01},
+ {name:"Rare Brain Rot", value:20, speed:0.015},
+ {name:"Legendary Dash Brain Rot", value:100, speed:0.03},
+ {name:"Mythic Dash Brain Rot", value:500, speed:0.05},
+ {name:"OG Brain Rot God", value:2000, speed:0.08}
+];
 
-  if (diff <= 0) {
-    document.getElementById("ramadan-time").innerHTML = "Ramadan Mubarak 🌙";
-    return;
-  }
+// Gear shop
+const gears = [
+ {name:"Speed Gear", cost:100, effect:()=>speedBoost+=0.3},
+ {name:"Mega Speed Gear", cost:500, effect:()=>speedBoost+=0.7},
+];
 
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-  document.getElementById("ramadan-time").innerHTML =
-    `${days}d ${hours}h ${minutes}m ${seconds}s`;
+// ---------------- UI ----------------
+function updateUI(){
+ document.getElementById("money").innerText = money;
+ document.getElementById("count").innerText = brainCount;
+}
+function toggleShop(){
+ let s = document.getElementById("shop");
+ s.style.display = s.style.display==="block"?"none":"block";
+ s.innerHTML="<b>GEAR SHOP</b><br>";
+ gears.forEach(g=>{
+  let b=document.createElement("button");
+  b.innerText=`${g.name} - $${g.cost}`;
+  b.onclick=()=>{
+    if(money>=g.cost){ money-=g.cost; g.effect(); updateUI(); }
+  };
+  s.appendChild(b);
+ });
 }
 
-updateRamadanCountdown();
-setInterval(updateRamadanCountdown, 1000);
+// ---------------- ADMIN ----------------
+function openAdmin(){
+ let code = prompt("Admin Code:");
+ if(code==="12345"){
+  isAdmin=true;
+  let a=document.getElementById("admin");
+  a.style.display="block";
+  a.innerHTML="<b>ADMIN PANEL</b><br>";
+  brainRots.forEach(br=>{
+    let b=document.createElement("button");
+    b.innerText="Spawn "+br.name;
+    b.onclick=()=>spawnBrain(br);
+    a.appendChild(b);
+  });
+  let m=document.createElement("button");
+  m.innerText="Give $10000";
+  m.onclick=()=>{money+=10000; updateUI();}
+  a.appendChild(m);
+ } else alert("Wrong code");
+}
+
+// ---------------- 3D SCENE ----------------
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x87ceeb);
+
+const camera = new THREE.PerspectiveCamera(75,innerWidth/innerHeight,0.1,1000);
+camera.position.set(0,6,12);
+
+const renderer = new THREE.WebGLRenderer({antialias:true});
+renderer.setSize(innerWidth,innerHeight);
+document.body.appendChild(renderer.domElement);
+
+// Light
+scene.add(new THREE.AmbientLight(0xffffff,0.6));
+const dl=new THREE.DirectionalLight(0xffffff,1);
+dl.position.set(5,10,5);
+scene.add(dl);
+
+// Floor
+const floor=new THREE.Mesh(
+ new THREE.PlaneGeometry(50,50),
+ new THREE.MeshStandardMaterial({color:0x555555})
+);
+floor.rotation.x=-Math.PI/2;
+scene.add(floor);
+
+// Red carpet
+const carpet=new THREE.Mesh(
+ new THREE.BoxGeometry(6,0.1,30),
+ new THREE.MeshStandardMaterial({color:0xff0000})
+);
+carpet.position.z=-5;
+scene.add(carpet);
+
+// 6 Bases (3 left, 3 right)
+for(let i=0;i<6;i++){
+ let base=new THREE.Mesh(
+  new THREE.BoxGeometry(3,1,3),
+  new THREE.MeshStandardMaterial({color:0x00aa00})
+ );
+ base.position.set(i<3?-10:10,0.5,(i%3)*6-6);
+ scene.add(base);
+}
+
+// Player
+const player=new THREE.Mesh(
+ new THREE.BoxGeometry(1,2,1),
+ new THREE.MeshStandardMaterial({color:0x0000ff})
+);
+player.position.y=1;
+scene.add(player);
+
+// ---------------- BRAIN ROT SPAWN ----------------
+const brains=[];
+function spawnBrain(br){
+ const b=new THREE.Mesh(
+  new THREE.SphereGeometry(0.4,16,16),
+  new THREE.MeshStandardMaterial({color:0xffff00})
+ );
+ b.userData=br;
+ b.position.set((Math.random()-0.5)*4,0.4,-18);
+ scene.add(b);
+ brains.push(b);
+}
+
+// auto spawn
+setInterval(()=>spawnBrain(brainRots[0]),3000);
+
+// ---------------- CONTROLS ----------------
+const keys={};
+addEventListener("keydown",e=>keys[e.key]=true);
+addEventListener("keyup",e=>keys[e.key]=false);
+
+// ---------------- LOOP ----------------
+function animate(){
+ requestAnimationFrame(animate);
+
+ if(keys["w"]||keys["ArrowUp"]) player.position.z-=0.15*speedBoost;
+ if(keys["s"]||keys["ArrowDown"]) player.position.z+=0.15*speedBoost;
+ if(keys["a"]||keys["ArrowLeft"]) player.position.x-=0.15*speedBoost;
+ if(keys["d"]||keys["ArrowRight"]) player.position.x+=0.15*speedBoost;
+
+ brains.forEach((b,i)=>{
+  b.position.z+=b.userData.speed;
+  if(b.position.distanceTo(player.position)<1){
+    money+=b.userData.value;
+    brainCount++;
+    scene.remove(b);
+    brains.splice(i,1);
+    updateUI();
+  }
+ });
+
+ renderer.render(scene,camera);
+}
+animate();
+
+onresize=()=>{
+ camera.aspect=innerWidth/innerHeight;
+ camera.updateProjectionMatrix();
+ renderer.setSize(innerWidth,innerHeight);
+};
 </script>
-</style>
 </body>
 </html>
